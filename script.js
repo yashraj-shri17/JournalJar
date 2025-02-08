@@ -15,7 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "quote": "Believe you can and you're halfway there.",
             "author": "Theodore Roosevelt"
-        }
+        },
+        {
+            "quote": "Believe you can and you're halfway there.",
+            "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Keep your face always toward the sunshine—and shadows will fall behind you.",
+            "author": "Walt Whitman"
+        },
+
     ];
 
     // Daily Prompt
@@ -126,7 +139,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
+    // Dark Mode
+    document.getElementById("theme-toggle").addEventListener("click", function() {
+        document.body.classList.toggle("dark-theme");
+        document.body.classList.toggle("light-theme");
+        
+        let icon = document.getElementById("theme-icon");
+        if (document.body.classList.contains("dark-theme")) {
+            icon.classList.remove("bi-moon");
+            icon.classList.add("bi-sun");
+        } else {
+            icon.classList.remove("bi-sun");
+            icon.classList.add("bi-moon");
+        }
+    });
     // Event Listeners
     document.getElementById('save-entry').addEventListener('click', saveEntry);
     document.getElementById('view-entries').addEventListener('click', viewEntries);
