@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function clearEntryFields() {
         document.getElementById('entry-title').value = '';
         document.getElementById('journal-text').value = '';
+        document.getElementById('tag-input').value = '';
         document.getElementById('tag-container').innerHTML = '';
     }
 
