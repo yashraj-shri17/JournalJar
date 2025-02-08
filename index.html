@@ -43,6 +43,10 @@
 
             <!-- Main Content -->
             <div class="col-md-9 main-content">
+                <div class="toggle-container">
+                    <theme-toggle></theme-toggle>
+                </div>
+                
                 <div class="journal-header">
                     <input type="text" id="entry-title" placeholder="Entry Title">
                     <div class="tag-section">
@@ -67,7 +71,7 @@
                 </div>
 
                 <!-- Entries Modal -->
-                <div class="modal fade" id="entriesModal" tabindex="-1">
+                <div class="modal fade" id="entriesModal" tabindex="-1" aria-labelledby="entriesModalLabel">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -85,6 +89,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>

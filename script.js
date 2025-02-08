@@ -1,3 +1,5 @@
+import "./components/toggle-theme.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     const dailyPrompts = [
         "What are you grateful for today?",
@@ -50,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const tagContainer = document.getElementById('tag-container');
 
         tagInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && tagInput .value.trim() !== '') {
+            if (e.key === 'Enter' && tagInput.value.trim() !== '') {
                 const tag = document.createElement('div');
                 tag.className = 'tag';
                 tag.textContent = tagInput.value;
