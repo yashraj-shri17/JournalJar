@@ -19,43 +19,6 @@ body {
     color: var(--text-color);
 }
 
-/* dark-theme added */
-.light-theme .main-content, .light-theme .sidebar {
-    background-color: white;
-    color: black;
-    border: 1px solid #ddd;
-}
-.dark-theme .main-content, .dark-theme .sidebar {
-    background: linear-gradient(135deg, #333 0%, #000 100%);
-    color: white;
-    border: 1px solid #444;
-}
-.dark-theme .mood-tracker , .dark-theme .daily-prompt, .dark-theme .quote-section,.dark-theme .mood-btn { 
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-}
-.toggle-btn {
-    padding: 10px 20px;
-    cursor: pointer;
-    border: none;
-    background: linear-gradient(135deg, #333 0%, #000 100%);
-    color: white;
-    border-radius: 50px;
-    margin-bottom: 10px; 
-}
-
-/* Dark theme styles for input fields */
-.dark-theme input[type="text"],
-.dark-theme textarea {
-    background-color: #333;
-    color: white;
-    border: 1px solid #555;
-}
-
-.dark-theme input[type="text"]::placeholder,
-.dark-theme textarea::placeholder {
-    color: #aaa;
-}
 .container-fluid {
     max-width: 1600px;
     margin: 0 auto;
@@ -89,7 +52,6 @@ body {
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
     padding: 15px;
-    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -262,7 +224,6 @@ body {
     border-radius: 10px;
     padding: 15px;
     margin-top: 15px;
-    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
