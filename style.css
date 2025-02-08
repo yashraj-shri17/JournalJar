@@ -278,3 +278,72 @@ body {
 .toggle-container {
   margin-bottom: 4px;
 }
+/* Dark Mode Styles */
+.dark-mode {
+    background: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .sidebar {
+    background: #1e1e1e;
+}
+
+.dark-mode .main-content {
+    background: #222;
+    color: #e0e0e0;
+}
+
+.dark-mode #journal-text, 
+.dark-mode #entry-title, 
+.dark-mode #tag-input {
+    background: #333;
+    color: #fff;
+    border-color: #555;
+}
+
+.dark-mode .mood-tracker, 
+.dark-mode .daily-prompt, 
+.dark-mode .quote-section {
+    background: #1e1e1e;
+}
+
+.dark-mode .mood-btn {
+    border-color: #555;
+    color: #fff;
+}
+
+.dark-mode .mood-btn:hover,
+.dark-mode .mood-btn.selected {
+    background-color: #6a5acd;
+}
+
+.dark-mode .tag {
+    background-color: #6a5acd;
+}
+
+.dark-mode .entries-item {
+    background-color: #333;
+    border-bottom: 1px solid #444;
+}
+
+/* Dark Mode Button Styling */
+#dark-mode-btn {
+    transition: 0.3s;
+}
+
+.dark-mode #dark-mode-btn {
+    background: #f4f4f4;
+    color: #333;
+}
+
+.dark-mode #dark-mode-btn i {
+    color: #333;
+}
+h4{
+    margin-left: 4rem;
+}
+.toggle{
+    margin-top: -2.5rem;
+    margin-left: 47rem;
+}
+

@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function clearEntryFields() {
         document.getElementById('entry-title').value = '';
         document.getElementById('journal-text').value = '';
+        document.getElementById('tag-input').value = '';
         document.getElementById('tag-container').innerHTML = '';
     }
 
@@ -139,4 +140,29 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMoodTracking();
     setupTagSystem();
     setupSearchFunctionality();
+});
+
+// Dark and Light Mode toggle functionality code
+document.addEventListener('DOMContentLoaded', () => {
+    const darkModeBtn = document.getElementById('dark-mode-btn');
+    const body = document.body;
+
+    // Check and Apply Saved Dark Mode Preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+        darkModeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+    }
+
+    // Toggle Dark Mode
+    darkModeBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('darkMode', 'enabled');
+            darkModeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+        } else {
+            localStorage.setItem('darkMode', 'disabled');
+            darkModeBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+        }
+    });
 });
