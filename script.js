@@ -15,6 +15,26 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "quote": "Believe you can and you're halfway there.",
             "author": "Theodore Roosevelt"
+        },
+        {
+            "quote": "Don't watch the clock; do what it does. Keep going.",
+            "author": "Sam Levenson"
+        },
+        {
+            "quote": "Keep your face always toward the sunshine—and shadows will fall behind you.",
+            "author": "Walt Whitman"
+        },
+        {
+            "quote": "The only way to do great work is to love what you do.",
+            "author": "Steve Jobs"
+        },
+        {
+            "quote": "Success is not the key to happiness. Happiness is the key to success.",
+            "author": "Albert Schweitzer"
+        },
+        {
+            "quote": "The best way to predict the future is to create it.",
+            "author": "Peter Drucker"
         }
     ];
 
@@ -50,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const tagContainer = document.getElementById('tag-container');
 
         tagInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && tagInput .value.trim() !== '') {
+            if (e.key === 'Enter' && tagInput.value.trim() !== '') {
                 const tag = document.createElement('div');
                 tag.className = 'tag';
                 tag.textContent = tagInput.value;
@@ -128,11 +148,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Dark Mode
+    function toggleTheme() {
+        document.body.classList.toggle("dark-theme");
+        document.body.classList.toggle("light-theme");
+
+        const theme = document.body.classList.contains("dark-theme") ? "dark" : "light";
+        localStorage.setItem("theme", theme);
+
+        let icon = document.getElementById("theme-icon");
+        if (theme === "dark") {
+            icon.classList.remove("bi-moon");
+            icon.classList.add("bi-sun");
+        } else {
+            icon.classList.remove("bi-sun");
+            icon.classList.add("bi-moon");
+        }
+    }
+
+    function loadTheme() {
+        const theme = localStorage.getItem("theme") || "light";
+        if (theme === "dark") {
+            document.body.classList.add("dark-theme");
+            document.body.classList.remove("light-theme");
+        } else {
+            document.body.classList.add("light-theme");
+            document.body.classList.remove("dark-theme");
+        }
+
+        let icon = document.getElementById("theme-icon");
+        if (theme === "dark") {
+            icon.classList.remove("bi-moon");
+            icon.classList.add("bi-sun");
+        } else {
+            icon.classList.remove("bi-sun");
+            icon.classList.add("bi-moon");
+        }
+    }
+
     // Event Listeners
+    document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
     document.getElementById('save-entry').addEventListener('click', saveEntry);
     document.getElementById('view-entries').addEventListener('click', viewEntries);
 
     // Initialize App
+    loadTheme();
     setDailyPrompt();
     setDailyQuote();
     setupMoodTracking();
