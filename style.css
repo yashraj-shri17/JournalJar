@@ -44,8 +44,6 @@ body {
     margin-bottom: 10px; 
 }
 
-/* Add this to your existing CSS file */
-
 /* Dark theme styles for input fields */
 .dark-theme input[type="text"],
 .dark-theme textarea {
