@@ -173,6 +173,7 @@ body {
         opacity: 0;
         transform: scale(0.8);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -192,7 +193,8 @@ body {
     margin-top: 20px;
 }
 
-#save-entry, #view-entries {
+#save-entry,
+#view-entries {
     padding: 12px 25px;
     border: none;
     border-radius: 30px;
@@ -213,13 +215,15 @@ body {
     color: var(--text-color);
 }
 
-#save-entry:hover, #view-entries:hover {
+#save-entry:hover,
+#view-entries:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Daily Prompt and Quote Styling */
-.daily-prompt, .quote-section {
+.daily-prompt,
+.quote-section {
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
     padding: 15px;
@@ -235,7 +239,9 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .sidebar, .main-content {
+
+    .sidebar,
+    .main-content {
         border-radius: 0;
     }
 }
@@ -250,10 +256,48 @@ body {
     background-color: #f9f9f9;
     border-bottom: 1px solid #e0e0e0;
     padding: 15px;
-     border-radius: 8px;
+    border-radius: 8px;
     transition: background-color var(--transition-speed) ease;
 }
 
 .entries-item:hover {
     background-color: #e9ecef;
+}
+
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: #6a5acd;
+    padding: 8px 0;
+    font-weight: 600;
+    color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.marquee-content {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 15s linear infinite;
+}
+
+.marquee-content span {
+    display: inline-block;
+    padding-right: 50px; 
+}
+
+@keyframes marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .marquee-content {
+        font-size: 14px;
+    }
 }
