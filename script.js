@@ -1,168 +1,156 @@
-import "./components/toggle-theme.js";
-
 document.addEventListener('DOMContentLoaded', () => {
-    const dailyPrompts = [
-        "What are you grateful for today?",
-        "Describe a moment that made you smile.",
-        "What challenges are you currently facing?",
-        "Write about a goal you want to achieve.",
-        "Reflect on a recent learning experience."
-    ];
-
-    const quotes = [
-        {
-            "quote": "The journey of a thousand miles begins with one step.",
-            "author": "Lao Tzu"
-        },
-        {
-            "quote": "Believe you can and you're halfway there.",
-            "author": "Theodore Roosevelt"
-        }
-    ];
-
-    // Daily Prompt
-    function setDailyPrompt() {
-        const promptElement = document.getElementById('daily-prompt-text');
-        const randomPrompt = dailyPrompts[Math.floor(Math.random() * dailyPrompts.length)];
-        promptElement.textContent = randomPrompt;
-    }
-
-    // Daily Quote
-    function setDailyQuote() {
-        const quoteElement = document.getElementById('daily-quote');
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        quoteElement.innerHTML = `"${randomQuote.quote}" - ${randomQuote.author}`;
-    }
-
-    // Mood Tracking
-    function setupMoodTracking() {
-        const moodButtons = document.querySelectorAll('.mood-btn');
-        moodButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                moodButtons.forEach(btn => btn.classList.remove('selected'));
-                button.classList.add('selected');
-                localStorage.setItem('currentMood', button.dataset.mood);
-            });
-        });
-    }
-
-    // Tag System
-    function setupTagSystem() {
-        const tagInput = document.getElementById('tag-input');
-        const tagContainer = document.getElementById('tag-container');
-
-        tagInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && tagInput.value.trim() !== '') {
-                const tag = document.createElement('div');
-                tag.className = 'tag';
-                tag.textContent = tagInput.value;
-                const closeBtn = document.createElement('span');
-                closeBtn.className = 'tag-close';
-                closeBtn.textContent = 'x';
-                closeBtn.onclick = () => tagContainer.removeChild(tag);
-                tag.appendChild(closeBtn);
-                tagContainer.appendChild(tag);
-                tagInput.value = '';
-            }
-        });
-    }
-
-    // Save Journal Entry
-    function saveEntry() {
-        const title = document.getElementById('entry-title').value;
-        const text = document.getElementById('journal-text').value;
-        const tags = Array.from(document.querySelectorAll('.tag')).map(tag => tag.textContent.replace('x', '').trim());
-        const mood = localStorage.getItem('currentMood') || 'neutral';
-
-        if (title && text) {
-            const entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
-            entries.push({ title, text, tags, mood, date: new Date().toLocaleString() });
-            localStorage.setItem('journalEntries', JSON.stringify(entries));
-            alert('Entry saved!');
-            clearEntryFields();
-        } else {
-            alert('Please fill in both title and text.');
-        }
-    }
-
-    // Clear Entry Fields
-    function clearEntryFields() {
-        document.getElementById('entry-title').value = '';
-        document.getElementById('journal-text').value = '';
-        document.getElementById('tag-input').value = '';
-        document.getElementById('tag-container').innerHTML = '';
-    }
-
-    // View Entries
-    function viewEntries() {
-        const entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
-        const entriesList = document.getElementById('entries-list');
-        entriesList.innerHTML = '';
-
-        entries.forEach(entry => {
-            const entryItem = document.createElement('div');
-            entryItem.className = 'entries-item';
-            entryItem.innerHTML = `<strong>${entry.title}</strong> <br> ${entry.text} <br> <small>${entry.date} - Mood: ${entry.mood}</small>`;
-            entriesList.appendChild(entryItem);
-        });
-
-        const entriesModal = new bootstrap.Modal(document.getElementById('entriesModal'));
-        entriesModal.show();
-    }
-
-    // Search Functionality
-    function setupSearchFunctionality() {
-        const searchInput = document.getElementById('search-entries');
-        searchInput.addEventListener('input', () => {
-            const entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
-            const searchTerm = searchInput.value.toLowerCase();
-            const entriesList = document.getElementById('entries-list');
-            entriesList.innerHTML = '';
-
-            entries.forEach(entry => {
-                if (entry.title.toLowerCase().includes(searchTerm) || entry.text.toLowerCase().includes(searchTerm)) {
-                    const entryItem = document.createElement('div');
-                    entryItem.className = 'entries-item';
-                    entryItem.innerHTML = `<strong>${entry.title}</strong> <br> ${entry.text} <br> <small>${entry.date} - Mood: ${entry.mood}</small>`;
-                    entriesList.appendChild(entryItem);
-                }
-            });
-        });
-    }
-
-    // Event Listeners
-    document.getElementById('save-entry').addEventListener('click', saveEntry);
-    document.getElementById('view-entries').addEventListener('click', viewEntries);
-
-    // Initialize App
-    setDailyPrompt();
-    setDailyQuote();
-    setupMoodTracking();
-    setupTagSystem();
-    setupSearchFunctionality();
-});
-
-// Dark and Light Mode toggle functionality code
-document.addEventListener('DOMContentLoaded', () => {
+    // Dark Mode Toggle
     const darkModeBtn = document.getElementById('dark-mode-btn');
-    const body = document.body;
+    const htmlElement = document.documentElement;
 
-    // Check and Apply Saved Dark Mode Preference
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+        htmlElement.setAttribute('data-theme', 'dark');
         darkModeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
     }
 
-    // Toggle Dark Mode
     darkModeBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-
-        if (body.classList.contains('dark-mode')) {
-            localStorage.setItem('darkMode', 'enabled');
-            darkModeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-        } else {
-            localStorage.setItem('darkMode', 'disabled');
+        if (htmlElement.getAttribute('data-theme') === 'dark') {
+            htmlElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
             darkModeBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+        } else {
+            htmlElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            darkModeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
         }
     });
+
+    // Mood Tracker
+    const moodButtons = document.querySelectorAll('.mood-btn');
+    let selectedMood = null;
+
+    moodButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            moodButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            selectedMood = button.dataset.mood;
+        });
+    });
+
+    // Tag System
+    const tagInput = document.getElementById('tag-input');
+    const tagContainer = document.getElementById('tag-container');
+    const tags = new Set();
+
+    tagInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && tagInput.value.trim()) {
+            const tagText = tagInput.value.trim().toLowerCase();
+            if (!tags.has(tagText)) {
+                tags.add(tagText);
+                const tagElement = document.createElement('div');
+                tagElement.className = 'tag';
+                tagElement.innerHTML = `
+                    ${tagText}
+                    <span class="tag-remove">&times;</span>
+                `;
+                tagContainer.appendChild(tagElement);
+                tagInput.value = '';
+
+                tagElement.querySelector('.tag-remove').addEventListener('click', () => {
+                    tags.delete(tagText);
+                    tagElement.remove();
+                });
+            }
+        }
+    });
+
+    // Journal Entries
+    const entries = JSON.parse(localStorage.getItem('journalEntries') || '[]');
+    const saveButton = document.getElementById('save-entry');
+    const viewButton = document.getElementById('view-entries');
+    const entriesModal = new bootstrap.Modal(document.getElementById('entriesModal'));
+
+    saveButton.addEventListener('click', () => {
+        const entry = {
+            id: Date.now(),
+            title: document.getElementById('entry-title').value,
+            content: document.getElementById('journal-text').value,
+            mood: selectedMood,
+            tags: Array.from(tags),
+            date: new Date().toISOString()
+        };
+
+        entries.unshift(entry);
+        localStorage.setItem('journalEntries', JSON.stringify(entries));
+        clearForm();
+    });
+
+    viewButton.addEventListener('click', () => {
+        displayEntries(entries);
+        entriesModal.show();
+    });
+
+    // Search and Filter Functionality
+    const moodFilter = document.getElementById('mood-filter');
+    const dateFilter = document.getElementById('date-filter');
+
+    // Listen to input events for search and filter
+    document.getElementById('search-entries').addEventListener('input', updateDisplay);
+    moodFilter.addEventListener('change', updateDisplay);
+    dateFilter.addEventListener('change', updateDisplay);
+
+    // Link the search button with the updateDisplay function
+    document.getElementById('search-button').addEventListener('click', updateDisplay);
+
+    function updateDisplay() {
+        const searchTerm = document.getElementById('search-entries').value.toLowerCase();
+        const selectedMood = moodFilter.value;
+        const selectedDate = dateFilter.value;
+
+        const filteredEntries = entries.filter(entry => {
+            const matchesSearch = entry.title?.toLowerCase().includes(searchTerm) ||
+                entry.content?.toLowerCase().includes(searchTerm) ||
+                entry.tags?.some(tag => tag.toLowerCase().includes(searchTerm));
+
+            const matchesMood = !selectedMood || entry.mood === selectedMood;
+
+            const entryDate = new Date(entry.date).toISOString().split('T')[0]; // formatted for comparison
+            const matchesDate = !selectedDate || entryDate === selectedDate;
+
+            return matchesSearch && matchesMood && matchesDate;
+        });
+
+        // Show or hide the search results header based on filtered entries
+        const searchResultsHeader = document.getElementById('search-results-header');
+        if (filteredEntries.length > 0) {
+            searchResultsHeader.style.display = 'block';
+        } else {
+            searchResultsHeader.style.display = 'none';
+        }
+
+        displayEntries(filteredEntries);
+    }
+
+    function clearForm() {
+        document.getElementById('entry-title').value = '';
+        document.getElementById('journal-text').value = '';
+        tagContainer.innerHTML = '';
+        tags.clear();
+        moodButtons.forEach(btn => btn.classList.remove('active'));
+        selectedMood = null;
+    }
+
+    // Random Quote Functionality
+    const quotes = [
+        "The only way to do great work is to love what you do.",
+        "Life is what happens when you're busy making other plans.",
+        "Get busy living or get busy dying.",
+        "You have within you right now, everything you need to deal with whatever the world can throw at you.",
+        "Believe you can and you're halfway there."
+    ];
+
+    function displayRandomQuote() {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const quoteDisplay = document.getElementById('quote-display'); // Ensure this ID exists in your HTML
+        quoteDisplay.innerText = quotes[randomIndex];
+    }
+
+    // Call this function on page load
+    displayRandomQuote();
 });
