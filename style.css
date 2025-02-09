@@ -4,6 +4,17 @@
     --text-color: #333;
     --accent-color: #4CAF50;
     --transition-speed: 0.3s;
+    --bg-color: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --bg-sidebar: linear-gradient(160deg, #ffffff 0%, #f0f4f8 100%);
+}
+
+.dark-mode {
+    --primary-color: #6a5acd;
+    --secondary-color: #333;
+    --text-color: #f4f4f4;
+    --accent-color: #4CAF50;
+    --bg-color: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    --bg-sidebar: linear-gradient(160deg, #333 0%, #2d2d2d 100%);
 }
 
 * {
@@ -12,10 +23,41 @@
     box-sizing: border-box;
 }*/
 body {
+
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #f4f4f4;
+
+    font-family: 'Poppins', Arial, sans-serif;
+    background: var(--bg-color);
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.container-fluid {
+    max-width: 1600px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Sidebar Styling */
+.sidebar {
+    background: var(--bg-sidebar);
+    border-radius: 15px 0 0 15px;
+    padding: 30px 20px;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.05);
+    transition: all var(--transition-speed) ease;
+}
+
+.sidebar:hover {
+    box-shadow: -5px 0 40px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+    font-weight: 700;
+    color: var(--primary-color);
+
     text-align: center;
 }
 
@@ -51,10 +93,20 @@ h1 {
 }
 
 
+/* Main Content Styling */
+.main-content {
+    background: var(--bg-color);
+    border-radius: 0 15px 15px 0;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+
 .mood-buttons {
     display: flex;
     justify-content: center;
     gap: 15px;
+
     margin-top: 10px;
 }
 
@@ -64,6 +116,60 @@ h1 {
     border: none;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
+
+    margin-bottom: 20px;
+}
+
+#entry-title {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    font-size: 18px;
+    transition: all var(--transition-speed) ease;
+}
+
+#entry-title:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.2);
+}
+
+#journal-text {
+    width: 100%;
+    min-height: 300px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    padding: 15px;
+    font-size: 16px;
+    resize: vertical;
+    transition: all var(--transition-speed) ease;
+}
+
+#journal-text:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.2);
+}
+
+/* Tag System */
+.tag-section {
+    position: relative;
+}
+
+#tag-input {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    transition: all var(--transition-speed) ease;
+
 }
 
 .mood-btn.selected {
@@ -154,6 +260,80 @@ button:hover {
         width: 100%;
         padding: 12px;
     }
+}
+
+
+
+.toggle-container {
+  margin-bottom: 4px;
+}
+/* Dark Mode Styles */
+.dark-mode {
+    background: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .sidebar {
+    background: #1e1e1e;
+}
+
+.dark-mode .main-content {
+    background: #222;
+    color: #e0e0e0;
+}
+
+.dark-mode #journal-text, 
+.dark-mode #entry-title, 
+.dark-mode #tag-input {
+    background: #333;
+    color: #fff;
+    border-color: #555;
+}
+
+.dark-mode .mood-tracker, 
+.dark-mode .daily-prompt, 
+.dark-mode .quote-section {
+    background: #1e1e1e;
+}
+
+.dark-mode .mood-btn {
+    border-color: #555;
+    color: #fff;
+}
+
+.dark-mode .mood-btn:hover,
+.dark-mode .mood-btn.selected {
+    background-color: #6a5acd;
+}
+
+.dark-mode .tag {
+    background-color: #6a5acd;
+}
+
+.dark-mode .entries-item {
+    background-color: #333;
+    border-bottom: 1px solid #444;
+}
+
+/* Dark Mode Button Styling */
+#dark-mode-btn {
+    transition: 0.3s;
+}
+
+.dark-mode #dark-mode-btn {
+    background: #f4f4f4;
+    color: #333;
+}
+
+.dark-mode #dark-mode-btn i {
+    color: #333;
+}
+h4{
+    margin-left: 4rem;
+}
+.toggle{
+    margin-top: -2.5rem;
+    margin-left: 47rem;
 }
 
 
