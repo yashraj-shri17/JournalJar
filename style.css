@@ -370,3 +370,28 @@ header h1{
     font-size: 5vw;
 }
 
+
+
+.mood-btn {
+  
+    
+    background: #fff;
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+   
+  }
+  
+  
+  .mood-btn:hover {
+    background-color: #B87CF3;
+  }
+  
+  
+  .mood-btn.active {
+    background-color: #B87CF3;
+    color: #fff;
+    border-color: #007bff;
+  }
+  

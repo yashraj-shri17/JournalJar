@@ -169,23 +169,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const container = document.getElementsByClassName("mood-btns");
-    const buttons = container.querySelectorAll("mood-btn");
 
-    // Ensure at least one button is highlighted on load:
-    if (buttons.length && !container.querySelector(".active")) {
-      buttons[0].classList.add("active");
-    }
-
-    // Add a click event listener to the container (event delegation)
-    container.addEventListener("click", function (event) {
-      if (event.target.tagName === "BUTTON") {
-        // Remove active from all buttons
-        buttons.forEach((btn) => btn.classList.remove("active"));
-        // Add active class to the clicked button
-        event.target.classList.add("active");
-      }
+document.addEventListener("DOMContentLoaded", function () {
+  const moodButtons = document.querySelectorAll(".mood-btn");
+  moodButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      moodButtons.forEach(btn => btn.classList.remove("active"));
+      this.classList.add("active");
     });
   });
+});
 
