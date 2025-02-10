@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const quotes = [
         {
             "quote": "The journey of a thousand miles begins with one step.",
-            "author": "Lao Tzu"
+            "author": "Lao Tzu" 
         },
         {
             "quote": "Believe you can and you're halfway there.",
