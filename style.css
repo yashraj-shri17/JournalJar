@@ -362,6 +362,7 @@ h4 {
   flex-direction: column;
   width: 96%;
 
+
   h2 {
     font-size: 3vw;
   }
@@ -425,4 +426,43 @@ header h1 {
 .tag-section {
   width: 100%;
   text-align: center;
+=======
+
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: #6a5acd;
+    padding: 8px 0;
+    font-weight: 600;
+    color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.marquee-content {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 15s linear infinite;
+}
+
+.marquee-content span {
+    display: inline-block;
+    padding-right: 50px; 
+}
+
+@keyframes marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .marquee-content {
+        font-size: 14px;
+    }
+
 }
