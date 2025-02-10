@@ -20,6 +20,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    // Adding Date and Time
+
+    function updateDateTime() {
+        const now = new Date();
+        document.getElementById('current-date-time').textContent = now.toLocaleString();
+    }
+    
+    // Character count
+    const journalText = document.getElementById('journal-text');
+    const charCount = document.getElementById('char-count');
+
+    journalText.addEventListener('input', () => {
+        const maxLength = 500; // Set your desired limit
+        const currentLength = journalText.value.length;
+        charCount.textContent = `${currentLength}/${maxLength} characters`;
+    });
+
+    // Facilitate the user to choose color
+    document.getElementById('bg-color-picker').addEventListener('change', (event) => {
+        const color = event.target.value;
+        document.body.style.backgroundColor = color;
+        localStorage.setItem('backgroundColor', color);
+    });
+    
+    // Apply saved background color on page load
+    const savedColor = localStorage.getItem('backgroundColor');
+    if (savedColor) {
+        document.body.style.backgroundColor = savedColor;
+    }
+    
+
+    setInterval(updateDateTime, 1000); // Update every second
+    updateDateTime();
     // Daily Prompt
     function setDailyPrompt() {
         const promptElement = document.getElementById('daily-prompt-text');

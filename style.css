@@ -203,7 +203,7 @@ h1 {
 button {
     padding: 10px 20px;
     border: none;
-    background: #6e8efb;
+    /* Removed background color */
     color: white;
     border-radius: 5px;
     cursor: pointer;
