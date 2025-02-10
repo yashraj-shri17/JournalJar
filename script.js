@@ -166,3 +166,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const moodButtons = document.querySelectorAll(".mood-btn");
+  moodButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      moodButtons.forEach(btn => btn.classList.remove("active"));
+      this.classList.add("active");
+    });
+  });
+});
+
