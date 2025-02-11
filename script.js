@@ -1,4 +1,10 @@
 import "./components/toggle-theme.js";
+import "./components/sidebar.js";
+import "./components/marquee.js";
+
+tailwind.config = {
+    darkMode: "class",
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const dailyPrompts = [
@@ -105,9 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
             entryItem.innerHTML = `<strong>${entry.title}</strong> <br> ${entry.text} <br> <small>${entry.date} - Mood: ${entry.mood}</small>`;
             entriesList.appendChild(entryItem);
         });
-
-        const entriesModal = new bootstrap.Modal(document.getElementById('entriesModal'));
-        entriesModal.show();
     }
 
     // Search Functionality
@@ -131,8 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event Listeners
-    document.getElementById('save-entry').addEventListener('click', saveEntry);
-    document.getElementById('view-entries').addEventListener('click', viewEntries);
+    document.getElementById('save-entry')?.addEventListener('click', saveEntry);
+    document.getElementById('view-entries')?.addEventListener('click', viewEntries);
 
     // Initialize App
     setDailyPrompt();
@@ -140,43 +143,17 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMoodTracking();
     setupTagSystem();
     setupSearchFunctionality();
+
+    viewEntries();
 });
-
-// Dark and Light Mode toggle functionality code
-document.addEventListener('DOMContentLoaded', () => {
-    const darkModeBtn = document.getElementById('dark-mode-btn');
-    const body = document.body;
-
-    // Check and Apply Saved Dark Mode Preference
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-        darkModeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-    }
-
-    // Toggle Dark Mode
-    darkModeBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-
-        if (body.classList.contains('dark-mode')) {
-            localStorage.setItem('darkMode', 'enabled');
-            darkModeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-        } else {
-            localStorage.setItem('darkMode', 'disabled');
-            darkModeBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
-        }
-    });
-});
-
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
-  const moodButtons = document.querySelectorAll(".mood-btn");
-  moodButtons.forEach(button => {
-    button.addEventListener("click", function () {
-      moodButtons.forEach(btn => btn.classList.remove("active"));
-      this.classList.add("active");
+    const moodButtons = document.querySelectorAll(".mood-btn");
+    moodButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            moodButtons.forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+        });
     });
-  });
 });
 
