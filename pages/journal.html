@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JournalJar - Journals / Your Personal Journal</title>
+    <link rel="icon" type="image/png" href="../favicon-img.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="bg-gray-50 dark:bg-neutral-800">
+
+    <div class="flex h-[95vh]">
+        <sidebar-component></sidebar-component>
+        <main class="flex-1 h-screen overflow-y-scroll"></main>
+        <div class="container mx-auto px-6 mt-6">
+            <section class="entries bg-white dark:bg-neutral-800 shadow rounded-lg">
+                <h2 class="text-2xl font-semibold mb-4 dark:text-neutral-100">Your Journals</h2>
+                <input type="text" id="search-entries" placeholder="Search entries..."
+                    class="w-full border border-gray-300 dark:border-neutral-700 rounded p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-neutral-900 dark:text-neutral-100">
+                <div id="entries-list" class="space-y-4"></div>
+            </section>
+
+            <ul id="journal-list" class="space-y-4">
+                <!-- Journal entries will be dynamically inserted here -->
+            </ul>
+        </div>
+        </main>
+    </div>
+
+    <marquee-component></marquee-component>
+
+    <script type="module">
+        import "../components/toggle-theme.js";
+        import "../components/sidebar.js";
+        import "../components/marquee.js";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const journalEntries = localStorage.getItem('journalEntries') ? JSON.parse(localStorage.getItem('journalEntries')) : [];
+
+            const journalList = document.getElementById('journal-list');
+
+            journalEntries.forEach(entry => {
+                const listItem = document.createElement('li');
+                listItem.className = 'bg-white dark:bg-neutral-700 p-4 rounded shadow';
+
+                const title = document.createElement('h2');
+                title.className = 'text-xl font-semibold';
+                title.textContent = entry.title;
+
+                const text = document.createElement('p');
+                text.className = 'text-gray-600 dark:text-gray-300';
+                text.textContent = entry.text;
+
+                const date = document.createElement('p');
+                date.className = 'text-gray-500 dark:text-gray-400 text-sm';
+                date.textContent = `Date: ${entry.date}`;
+
+                const tags = document.createElement('p');
+                tags.className = 'text-gray-500 dark:text-gray-400 text-sm';
+                tags.textContent = `Tags: ${entry.tags.join(', ')}`;
+
+                listItem.appendChild(title);
+                listItem.appendChild(text);
+                listItem.appendChild(date);
+                listItem.appendChild(tags);
+
+                journalList.appendChild(listItem);
+            });
+        });
+    </script>
+</body>
+
+</html>

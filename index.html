@@ -1,87 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JournalJar-Your Personal Journal</title>
     <link rel="icon" type="image/png" href="favicon-img.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
 </head>
 
+<body class="bg-gray-50 dark:bg-neutral-900">
 
-<body>
+    <div class="flex h-[95vh]">
+        <sidebar-component></sidebar-component>
+        <main class="flex-1 px-2 pt-2 h-full overflow-y-scroll">
+            <!-- Mood Tracker Section -->
+            <section class="mood-tracker container mx-auto p-6">
+                <h2 class="text-3xl font-bold dark:text-neutral-100">Welcome back!</h2>
+                <p class="dark:text-neutral-300" id="daily-prompt-text"></p>
+                <blockquote class="dark:text-neutral-300" id="daily-quote"></blockquote>
 
-    <div class="marquee-container">
-        <div class="marquee-content">
-            <span> | &nbsp;&nbsp;&nbsp; JournalJar: A modular tracker to effortlessly log, organize, and reflect on your daily journey &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
-            Your personal journal, but smarter—modular tracking for your evolving journey &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
-            Capture your moments, track your progress, and reflect—all in one place.</span>
-            <span> | &nbsp;&nbsp;&nbsp; JournalJar: A modular tracker to effortlessly log, organize, and reflect on your daily journey &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
-            Your personal journal, but smarter—modular tracking for your evolving journey &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
-            Capture your moments, track your progress, and reflect—all in one place.</span>
-        </div>
-    </div>
-    <header>
-        <h1>Journal Jar</h1>
-        <p id="daily-prompt-text"></p>
-        <blockquote id="daily-quote"></blockquote>
-    </header>
-
-    <section class="mood-tracker container-fluid">
-        <h2>Mood Tracker</h2>
-        <div class="mood-buttons">
-            <button class="mood-btn" data-mood="happy">😊 Happy</button>
-            <button class="mood-btn" data-mood="neutral">😐 Neutral</button>
-            <button class="mood-btn" data-mood="sad">😢 Sad</button>
-            <button class="mood-btn" data-mood="excited">🤩 Excited</button>
-            <button class="mood-btn" data-mood="stressed">😫 Stressed</button>
-        </div>
-    </section>
-            <!-- Main Content -->
-            <div class="col-md-9 main-content">
-                <div class="toggle-container">
-                    <theme-toggle></theme-toggle>
+                <h2 class="text-2xl font-semibold dark:text-neutral-100 mb-4">Mood Tracker</h2>
+                <div class="mood-buttons flex flex-wrap gap-4">
+                    <button
+                        class="mood-btn flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-100 font-medium py-2 rounded transition"
+                        data-mood="happy">😊 Happy</button>
+                    <button
+                        class="mood-btn flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-100 font-medium py-2 rounded transition"
+                        data-mood="neutral">😐 Neutral</button>
+                    <button
+                        class="mood-btn flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-100 font-medium py-2 rounded transition"
+                        data-mood="sad">😢 Sad</button>
+                    <button
+                        class="mood-btn flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-100 font-medium py-2 rounded transition"
+                        data-mood="excited">🤩 Excited</button>
+                    <button
+                        class="mood-btn flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-100 font-medium py-2 rounded transition"
+                        data-mood="stressed">😫 Stressed</button>
                 </div>
-                
-               
+            </section>
 
+            <!-- Main Content -->
+            <div class="main-content container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Journal Entry Section -->
+                <section class="journal-entry md:col-span-2 bg-white dark:bg-neutral-800 shadow rounded-lg p-6">
+                    <h2 class="text-2xl font-semibold mb-4 dark:text-neutral-100">Write a New Entry</h2>
+                    <input type="text" id="entry-title" placeholder="Entry Title"
+                        class="w-full border border-gray-300 dark:border-neutral-700 rounded p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-neutral-900 dark:text-neutral-100">
+                    <textarea id="journal-text" placeholder="Write your thoughts..." rows="5"
+                        class="w-full border border-gray-300 dark:border-neutral-700 rounded p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-neutral-900 dark:text-neutral-100"></textarea>
 
-    <section class="journal-entry">
-        <h2>Write a New Entry</h2>
-        <input type="text" id="entry-title" placeholder="Entry Title">
-        <textarea id="journal-text" placeholder="Write your thoughts..."></textarea>
+                    <div class="tag-section mb-4">
+                        <input type="text" id="tag-input" placeholder="Add tags (press Enter)"
+                            class="w-full border border-gray-300 dark:border-neutral-700 rounded p-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-neutral-900 dark:text-neutral-100">
+                        <div id="tag-container" class="mt-2 flex flex-wrap gap-2"></div>
+                    </div>
 
+                    <div class="flex gap-4">
+                        <button id="save-entry"
+                            class="bg-purple-500 text-white font-medium py-2 px-4 rounded hover:bg-purple-600 transition">Save
+                            Entry</button>
+                    </div>
+                </section>
 
-        <div class="tag-section">
-            <input type="text" id="tag-input" placeholder="Add tags (press Enter)">
-            <div id="tag-container"></div>
-        </div>
-
-        <button id="save-entry">Save Entry</button>
-        <button id="view-entries">View Entries</button>
-    </section>
-
-    <section class="entries">
-        <h2>Journal Entries</h2>
-        <input type="text" id="search-entries" placeholder="Search entries...">
-        <div id="entries-list"></div>
-    </section>
-
-  
-                
-               
-
-                <!-- Entries Modal -->
-                
-                
-                    
+                <!-- Entries Section -->
+                <section class="hidden entries bg-white dark:bg-neutral-800 shadow rounded-lg p-6">
+                    <h2 class="text-2xl font-semibold mb-4 dark:text-neutral-100">Journal Entries</h2>
+                    <input type="text" id="search-entries" placeholder="Search entries..."
+                        class="w-full border border-gray-300 dark:border-neutral-700 rounded p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-neutral-900 dark:text-neutral-100">
+                    <div id="entries-list" class="space-y-4"></div>
+                </section>
             </div>
-        </div>
+
+        </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <marquee-component></marquee-component>
+
     <script type="module" src="script.js"></script>
 
 </body>
